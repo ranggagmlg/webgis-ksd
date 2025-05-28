@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebGIS PT. KSD</title>
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="style.css"/>
+
+    <style>
+        #map {
+            height: 84vh;
+        }
+        #capture-area {
+            position: relative;
+            background: white;
+        }
+    </style>
+
+    <!-- html2canvas -->
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <!-- jsPDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+    <div class="Header">
+        <h2><strong>PETA EWS INTERAKTIF PT. KSD</strong></h2>
+            <div class="Controls"></div>
+                <label for="input-excel"><strong>Upload Excel:</strong></label>
+                <input type="file" id="input-excel" accept=".xlsx" />
+                <button id="download-trigger">Download Peta</button>
+            </div>
+    </div>
+
+    <!-- Area gabungan peta dan tabel -->
+    <div id="capture-area">
+        <div id="map-container" style="height: 100%; width: 100%;">
+            <div id="map" style="height: 100%;"></div>
+        </div>
+        <div id="rekap-tabel" class="tabel-rekap"></div>
+    </div>
+
+    <!-- Modal Preview -->
+    <div id="preview-modal" style="display:none; justify-content:center; align-items:center; position:fixed; top:0; left:0; width:100%; height:100%; background-color:rgba(0,0,0,0.6); z-index:9999;">
+        <div style="background:#fff; padding:20px; border-radius:8px; text-align:center;">
+            <h3>Preview Peta</h3>
+            <img id="preview-img" src="" style="max-width:90%; max-height:70vh;"/>
+            <br><br>
+            <button id="download-jpg">Download JPG</button>
+            <button id="download-pdf">Download PDF</button>
+            <button onclick="document.getElementById('preview-modal').style.display='none'">Tutup</button>
+        </div>
+    </div>
+
+    <!-- Layout Peta Download -->
+    <div id="print-layout" style="display: none;">
+        <h2 style="text-align: center; margin-bottom: 20px; padding: 0; font-size: 20pt">PETA EWS PT. KSD</h2>
+        <div class="print-content-wrapper">
+            <!-- Peta Container -->
+            <div id="print-map-container">
+                <div id="print-map"></div>
+            </div>
+            <!-- Legenda & Tabel -->
+            <div id="print-legend">
+                <h3 style="margin-bottom: 15px; text-align: center;">LEGENDA</h3>
+                <div id="legend-content"></div>
+                <div id="print-tabel" style="margin-top: 30px;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+    <!-- SheetJS -->
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+    <!-- Pastikan ini di-load sebelum script.js -->
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <!-- Script Utama -->
+    <script src="script.js"></script>
+</body>
+</html>
